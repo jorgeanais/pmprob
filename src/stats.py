@@ -7,6 +7,7 @@ import numpy.typing as npt
 Funcions borrowed from the astroML library.
 """
 
+
 def log_multivariate_gaussian(x, mu, V, Vinv=None, method=1):
     """Evaluate a multivariate gaussian N(x|mu, V)
 
@@ -151,9 +152,8 @@ def get_correlation_matrix_3x3(
     Xerr[:, diag, diag] = np.vstack([dx**2, dy**2, dz**2]).T
     return Xerr
 
-def get_correlation_matrix_2x2(
-    dx: npt.NDArray, dy: npt.NDArray, X: npt.NDArray
-):
+
+def get_correlation_matrix_2x2(dx: npt.NDArray, dy: npt.NDArray, X: npt.NDArray):
     """
     Construct the correlation matrix for the proper motions.
 

@@ -63,25 +63,25 @@ def load_mcw_arrays_from_text_files(
     mean_file: str | Path, cov_file: str | Path, weights_file: str | Path
 ) -> MCW_arrays:
     """Load mean, covariance and weights from text files."""
-    
+
     mean = np.loadtxt(mean_file)
     cov = _text_file_to_array3d(cov_file)
     weights = np.loadtxt(weights_file)
-    
+
     return mean, cov, weights  #  {"mean": mean, "cov": cov, "weights": weights}
 
 
 def load_mcw_arrays_from_input_dir(input_dir: str | Path) -> MCW_arrays:
     """Load mean, covariance and weights from text files in an input directory."""
-    
+
     input_dir = Path(input_dir)
     mean_file = input_dir / "mean.txt"
     cov_file = input_dir / "cov.txt"
     weights_file = input_dir / "weights.txt"
-    
+
     if not mean_file.exists() or not cov_file.exists() or not weights_file.exists():
-        raise FileNotFoundError("GMM parameters files do not exist") 
-    
+        raise FileNotFoundError("GMM parameters files do not exist")
+
     return load_mcw_arrays_from_text_files(mean_file, cov_file, weights_file)
 
 

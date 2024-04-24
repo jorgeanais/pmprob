@@ -12,7 +12,9 @@ from src.prob import get_field_and_memb_likelihoods, get_probability
 @click.option("-f", help="Input fits file", required=True)
 @click.option("-o", help="Output fits file", required=True)
 @click.option("-p", help="GMM parameters dir", default="gmm_params/pm+par_7comp/")
-def main(f, o, p):
+# Add true of false option to compute total probabilities
+@click.option("--prob", help="Compute total probabilities", is_flag=True, default=False)
+def main(f, o, p, prob):
 
     # Initialize logger
     logging.basicConfig(
@@ -25,7 +27,6 @@ def main(f, o, p):
     logging.info(f"Input file: {f}")
     logging.info(f"Output file: {o}")
 
-
     # Inputs
     input_file, output_file = Path(f), Path(o)
     gmm_params_dir = Path(p)
@@ -37,7 +38,7 @@ def main(f, o, p):
     if output_file.exists():
         logging.error("Output file already exists")
         raise FileExistsError("Output file already exists")
-    
+
     if not gmm_params_dir.exists():
         logging.error("GMM parameters directory does not exist")
         raise FileNotFoundError("GMM parameters directory does not exist")
@@ -49,23 +50,27 @@ def main(f, o, p):
         data_columns=["pmra", "pmra", "parallax"],
         errors_columns=["pmra_error", "pmra_error", "parallax_error"],
     )
-    
+
     # Load GMM parameters
     logging.info("Loading GMM parameters")
     mean, cov, weights = load_mcw_arrays_from_input_dir(gmm_params_dir)
     mcw_memb = (mean[-1], cov[-1], np.array([1.0]))
-    mcw_field = (mean[:-1], cov[:-1], weights[:-1]/np.sum(weights[:-1]))
-    
-    logging.info("Computing probabilities...")
+    mcw_field = (mean[:-1], cov[:-1], weights[:-1] / np.sum(weights[:-1]))
+
+    logging.info("Computing likelihoods...")
     pdf_memb, pdf_field = get_field_and_memb_likelihoods(X, Xerr, mcw_memb, mcw_field)
-    q_memb_i = get_probability(pdf_memb, pdf_field, eta_0 =0.01, iterations = 1)
-    
-    logging.info("Saving results...")
     df["prob_xi_memb"] = pdf_memb
     df["prob_xi_field"] = pdf_field
-    df["q_memb_i"] = q_memb_i
-    save_as_fits(output_file, df)
     
+    if prob:
+        logging.info("Computing total...")
+        q_memb = get_probability(pdf_memb, pdf_field, eta_0=0.01, iterations=1)
+        df["q_memb"] = q_memb
+    
+    
+    logging.info("Saving results...")
+    save_as_fits(output_file, df)
+
 
 if __name__ == "__main__":
     main()

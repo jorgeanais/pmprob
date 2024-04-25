@@ -1,7 +1,7 @@
 import numpy as np
 import numpy.typing as npt
 
-from src.stats import get_correlation_matrix_3x3, gmm_pdf
+from src.stats import get_correlation_matrix_3x3, gmm_pdf, get_correlation_matrix_2x2
 
 
 def get_field_and_memb_likelihoods(
@@ -21,8 +21,10 @@ def get_field_and_memb_likelihoods(
     n_dim = X.shape[1]
     if n_dim == 3:
         Xerr_ = get_correlation_matrix_3x3(Xerr[:, 0], Xerr[:, 1], Xerr[:, 2], X)
+    elif n_dim == 2:
+        Xerr_ = get_correlation_matrix_2x2(Xerr[:, 0], Xerr[:, 1], X)
     else:
-        raise ValueError("Only 3D data is supported")
+        raise ValueError("Only 2D and 3D data is supported")
 
     pdf_field = gmm_pdf(X, Xerr_, mu=mcw_field[0], V=mcw_field[1], alpha=mcw_field[2])
     pdf_memb = gmm_pdf(X, Xerr_, mu=mcw_memb[0], V=mcw_memb[1], alpha=mcw_memb[2])

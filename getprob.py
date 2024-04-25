@@ -15,7 +15,7 @@ from src.prob import get_field_and_memb_likelihoods, get_probability
 @click.option("-f", help="Input fits file", required=True)
 @click.option("-o", help="Output fits file", required=True)
 @click.option("-eta", help="Initial eta value", type=float, default=0.01)
-@click.option("-niter", help="Number of iterations", type=int default=5)
+@click.option("-niter", help="Number of iterations", type=int, default=5)
 def main(f, o, eta, niter):
     
     # Initialize logger

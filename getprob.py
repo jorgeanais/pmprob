@@ -51,7 +51,7 @@ def main(f, o, eta, niter):
     
     # MAIN
     logging.info("Computing total probabilities...")
-    q_memb = get_probability(pdf_memb, pdf_field, eta_0=eta, iterations=niter)
+    q_memb = get_probability(pdf_memb, pdf_field, eta_0=float(eta), iterations=int(niter))
     df["q_memb"] = q_memb
     
     

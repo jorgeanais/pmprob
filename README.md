@@ -27,7 +27,7 @@ python main.py  \
 ```
 
 
-## Pendientes
+
 
 ```bash
 python main.py \
@@ -45,3 +45,31 @@ python main.py  \
     -ps pm_only
 ```
 
+## Get Total probabilities
+
+
+Testing
+```bash
+python getprob.py  \
+    -f /home/jorge/zorro/base_sample/lowbulge/likelihood/vvvx_x_gaia_lowbulge_proc_likelihood_pmonly.fits \
+    -o /home/jorge/zorro/base_sample/lowbulge/likelihood/vvvx_x_gaia_lowbulge_proc_likelihood_pmonly_totalprob.fits \
+    -eta 0.01 \
+    -niter 10 
+``` 
+
+Case VVVX +  VIRAC2 PM+PARALLAX
+```bash
+python getprob.py  \
+    -f /home/jorge/zorro/base_sample/lowbulge/likelihood/virac2_x_vvvx_pm+parallax_merged.fits \
+    -o /home/jorge/zorro/base_sample/lowbulge/totalprob/virac2_x_vvvx_pm+parallax_merged_totalprob.fits \
+    -eta 0.01 \
+    -niter 10
+``` 
+Case VVVX +  VIRAC2 ONLYPM
+```bash
+python getprob.py  \
+    -f /home/jorge/zorro/base_sample/lowbulge/likelihood/virac2_x_vvvx_pmonly_merged.fits \
+    -o /home/jorge/zorro/base_sample/lowbulge/totalprob/virac2_x_vvvx_pmonly_merged_totalprob.fits \
+    -eta 0.01 \
+    -niter 10
+```

@@ -1,6 +1,6 @@
 import numpy as np
 import numpy.typing as npt
-#import logging
+import logging
 
 from src.stats import get_correlation_matrix_3x3, gmm_pdf, get_correlation_matrix_2x2
 
@@ -57,6 +57,6 @@ def get_probability(
         # q_field_i = (1 - eta) * prob_xi_field / total_likelihood
         mask = np.isnan(q_memb_i)
         eta = np.average(q_memb_i[~mask])
-        #logging.INFO(f"Iteration {i+1}: eta = {eta}")
+        logging.info(f"Iteration {i+1}: eta = {eta}")
 
     return q_memb_i

@@ -93,7 +93,7 @@ python getprob.py  \
     -f /home/jorge/zorro/base_sample/lowbulge/60_merged/virac2_x_vvvx_pmonly_merged_fixed.fits \
     -o /home/jorge/zorro/base_sample/lowbulge/70_totalprob/virac2_x_vvvx_pmonly_totalprob.fits \
     -eta 0.01 \
-    -niter 10
+    -niter 20
 ```
 
 ### Case VVVX +  VIRAC2 (PM+PARALLAX)
@@ -103,9 +103,8 @@ python getprob.py  \
     -f /home/jorge/zorro/base_sample/lowbulge/60_merged/virac2_x_vvvx_pm+parallax_merged_fixed.fits \
     -o /home/jorge/zorro/base_sample/lowbulge/70_totalprob/virac2_x_vvvx_pm+parallax_totalprob.fits \
     -eta 0.01 \
-    -niter 10
+    -niter 20
 ```
-
 
 ### Case VVVX +  VVV (ONLY PM)
 
@@ -114,7 +113,7 @@ python getprob.py  \
     -f /home/jorge/zorro/base_sample/lowbulge/60_merged/vvv_x_vvvx_pmonly_merged.fits \
     -o /home/jorge/zorro/base_sample/lowbulge/70_totalprob/vvv_x_vvvx_pmonly_totalprob.fits \
     -eta 0.01 \
-    -niter 10
+    -niter 20
 ```
 
 ### Case VVVX +  VVV (PM+PARALLAX)
@@ -124,5 +123,41 @@ python getprob.py  \
     -f /home/jorge/zorro/base_sample/lowbulge/60_merged/vvv_x_vvvx_pm+parallax_merged.fits \
     -o /home/jorge/zorro/base_sample/lowbulge/70_totalprob/vvv_x_vvvx_pm+parallax_totalprob.fits \
     -eta 0.01 \
+    -niter 20
+```
+
+
+### Case VVV (PM+PARALLAX)
+
+```bash
+python getprob.py  \
+    -f /home/jorge/zorro/base_sample/lowbulge/40_likelihood/vvv_gaia_lowbulge_proc_likelihood_pm+parallax.fits \
+    -o /home/jorge/zorro/base_sample/lowbulge/70_totalprob/ESTE_vvv_gaia_lowbulge_proc_likelihood_pm+parallax_totalprob.fits \
+    -eta 0.01 \
     -niter 10
+```
+
+```bash
+python getprob.py  \
+    -f /home/jorge/zorro/base_sample/lowbulge/40_likelihood/vvv_gaia_lowbulge_proc_likelihood_pm+parallax.fits \
+    -o /home/jorge/zorro/base_sample/lowbulge/70_totalprob/ESTE_vvv_gaia_lowbulge_proc_likelihood_pm+parallax_totalprob.fits \
+    -eta 0.01 \
+    -niter 10
+```
+
+```bash
+python getprob.py  \
+    -f /home/jorge/zorro/base_sample/lowbulge/40_likelihood/vvvx_x_gaia_lowbulge_proc_likelihood_pm+parallax.fits \
+    -o /home/jorge/zorro/base_sample/lowbulge/70_totalprob/ESTE_vvvx_x_gaia_lowbulge_proc_likelihood_pm+parallax.fits \
+    -eta 0.01 \
+    -niter 1
+```
+
+## Combined
+```bash
+python main.py --prob \
+    -f /home/jorge/Documents/data/sgr/base_sample/lowbulge/40_likelihood/vvvx_x_gaia_lowbulge_proc_likelihood_pm+parallax.fits \
+    -o /home/jorge/test_codepmprob_data.fits \
+    -p gmm_params/pm+par_7comp \
+    -ps pm+parallax
 ```

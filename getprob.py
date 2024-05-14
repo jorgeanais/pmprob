@@ -15,7 +15,7 @@ from src.prob import get_field_and_memb_likelihoods, get_probability
 @click.option("-f", help="Input fits file", required=True)
 @click.option("-o", help="Output fits file", required=True)
 @click.option("-eta", help="Initial eta value", type=float, default=0.01)
-@click.option("-niter", help="Number of iterations", type=int, default=5)
+@click.option("-niter", help="Number of iterations", type=int, default=1)
 def main(f, o, eta, niter):
     
     # Initialize logger
@@ -51,8 +51,14 @@ def main(f, o, eta, niter):
     
     # MAIN
     logging.info("Computing total probabilities...")
-    q_memb = get_probability(pdf_memb, pdf_field, eta_0=float(eta), iterations=int(niter))
+    q_memb, q_field = get_probability(
+        prob_xi_memb=pdf_memb,
+        prob_xi_field=pdf_field,
+        eta_0=float(eta),
+        iterations=int(niter),
+    )
     df["q_memb"] = q_memb
+    df["q_field"] = q_field
     
     
     logging.info("Saving results...")

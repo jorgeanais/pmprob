@@ -38,7 +38,7 @@ def get_probability(
     prob_xi_field: npt.NDArray,
     eta_0=0.01,
     iterations=1,
-) -> npt.NDArray:
+) -> tuple[npt.NDArray, npt.NDArray]:
     """Get the probability of being a member based on the likelihoods
 
     Args:
@@ -54,9 +54,9 @@ def get_probability(
     for i in range(iterations):
         total_likelihood = eta * prob_xi_memb + (1 - eta) * prob_xi_field
         q_memb_i = eta * prob_xi_memb / total_likelihood
-        # q_field_i = (1 - eta) * prob_xi_field / total_likelihood
+        q_field_i = (1 - eta) * prob_xi_field / total_likelihood
         mask = np.isnan(q_memb_i)
         eta = np.average(q_memb_i[~mask])
         logging.info(f"Iteration {i+1}: eta = {eta}")
 
-    return q_memb_i
+    return q_memb_i, q_field_i

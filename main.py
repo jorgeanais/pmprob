@@ -47,8 +47,8 @@ def main(f, o, p, prob, ps):
     logging.info(f"Parameter space: {ps}")
     match ps:
         case "pm+parallax":
-            data_columns = ["pmra", "pmra", "parallax"]
-            errors_columns = ["pmra_error", "pmra_error", "parallax_error"]
+            data_columns = ["pmra", "pmdec", "parallax"]
+            errors_columns = ["pmra_error", "pmdec_error", "parallax_error"]
         case "pm_only":
             data_columns = ["pmra", "pmra"]
             errors_columns = ["pmra_error", "pmra_error"]
@@ -72,14 +72,22 @@ def main(f, o, p, prob, ps):
     mcw_field = (mean[:-1], cov[:-1], weights[:-1] / np.sum(weights[:-1]))
     
     logging.info("Computing likelihoods...")
-    pdf_memb, pdf_field = get_field_and_memb_likelihoods(X, Xerr, mcw_memb, mcw_field)
+    pdf_memb, pdf_field = get_field_and_memb_likelihoods(
+        X, Xerr, mcw_memb, mcw_field
+    )
     df["prob_xi_memb"] = pdf_memb
     df["prob_xi_field"] = pdf_field
     
     if prob:
         logging.info("Computing total...")
-        q_memb = get_probability(pdf_memb, pdf_field, eta_0=0.01, iterations=1)
+        q_memb, q_field = get_probability(
+            prob_xi_memb=pdf_memb,
+            prob_xi_field=pdf_field,
+            eta_0=0.01,
+            iterations=1
+        )
         df["q_memb"] = q_memb
+        df["q_field"] = q_field
     
     
     logging.info("Saving results...")
@@ -88,3 +96,4 @@ def main(f, o, p, prob, ps):
 
 if __name__ == "__main__":
     main()
+

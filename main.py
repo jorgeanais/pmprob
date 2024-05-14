@@ -13,8 +13,9 @@ from src.prob import get_field_and_memb_likelihoods, get_probability
 @click.option("-o", help="Output fits file", required=True)
 @click.option("-p", help="GMM parameters dir", default="gmm_params/pm+par_7comp/")
 @click.option("-ps", help="Parameter space (pm+parallax or pm_only)", default="pm+parallax")
+@click.option("-bs", help="Batch size", type=int, default=100_000)
 @click.option("--prob", help="Compute total probabilities", is_flag=True, default=False)
-def main(f, o, p, prob, ps):
+def main(f, o, p, prob, ps, bs):
     
     # Initialize logger
     logging.basicConfig(
@@ -50,8 +51,8 @@ def main(f, o, p, prob, ps):
             data_columns = ["pmra", "pmdec", "parallax"]
             errors_columns = ["pmra_error", "pmdec_error", "parallax_error"]
         case "pm_only":
-            data_columns = ["pmra", "pmra"]
-            errors_columns = ["pmra_error", "pmra_error"]
+            data_columns = ["pmra", "pmdec"]
+            errors_columns = ["pmra_error", "pmdec_error"]
         case _:
             logging.error("Parameter space must be 'pm+parallax' or 'pm_only'")
             raise ValueError("Parameter space must be 'pm+parallax' or 'pm_only'")
@@ -65,18 +66,40 @@ def main(f, o, p, prob, ps):
         errors_columns=errors_columns,
     )
     
+    
     # Load GMM parameters
-    logging.info("Loading GMM parameters")
+    logging.info(f"Loading GMM parameters from {gmm_params_dir}")
     mean, cov, weights = load_mcw_arrays_from_input_dir(gmm_params_dir)
     mcw_memb = (mean[-1], cov[-1], np.array([1.0]))
     mcw_field = (mean[:-1], cov[:-1], weights[:-1] / np.sum(weights[:-1]))
     
+    # Calcular por lotes
     logging.info("Computing likelihoods...")
-    pdf_memb, pdf_field = get_field_and_memb_likelihoods(
-        X, Xerr, mcw_memb, mcw_field
-    )
+    
+    pdf_memb = np.zeros(X.shape[0])
+    pdf_field = np.zeros(X.shape[0])
+    
+    batch_size = bs
+    num_batches = X.shape[0] // batch_size + (1 if X.shape[0] % batch_size != 0 else 0)
+    logging.info(f"{num_batches=}")
+    
+    for i in range(num_batches):
+        print(i+1, num_batches)
+        logging.info(f"iteration: {i}/{num_batches}")
+        start_idx = i * batch_size
+        end_idx = min((i + 1) * batch_size, X.shape[0])
+        X_batch = X[start_idx:end_idx]
+        Xerr_batch = Xerr[start_idx:end_idx]
+        pdf_memb_batch, pdf_field_batch = get_field_and_memb_likelihoods(
+            X_batch, Xerr_batch, mcw_memb, mcw_field
+        )
+        pdf_memb[start_idx:end_idx] = pdf_memb_batch
+        pdf_field[start_idx:end_idx] = pdf_field_batch
+    
+    
     df["prob_xi_memb"] = pdf_memb
     df["prob_xi_field"] = pdf_field
+    
     
     if prob:
         logging.info("Computing total...")

@@ -13,34 +13,102 @@ python main.py \
 ```
 
 ```bash
-python main.py  \
-    -f /home/jorge/Documents/data/sgr/base_sample/lowbulge/proc/vvvx_x_gaia_lowbulge_proc.fits \
-    -o /home/jorge/vvvx_x_gaia_lowbulge_proc_likelihood_pmonly.fits \
-    -p gmm_params/pm_only_13comp \
-    -ps pm_only
-```
-
-```bash
-python main.py  \
-    -f /home/jorge/zorro/base_sample/lowbulge/proc/vvv_gaia_lowbulge_proc.fits \
-    -o /home/jorge/zorro/base_sample/lowbulge/likelihood/vvv_gaia_lowbulge_likelihood_pmonly.fits \
-    -p gmm_params/pm_only_13comp \
-    -ps pm_only
-```
-
-```bash
 python main.py \
-    -f /home/jorge/zorro/base_sample/lowbulge/proc/virac2_lowbulge_proc.fits \
-    -o /home/jorge/zorro/base_sample/lowbulge/likelihood/virac2_lowbulge_proc_likelihood_pm+parallax.fits \
+    -f /home/jorge/zorro/base_sample/lowbulge/30_proc/virac2_lowbulge_proc.fits \
+    -o /home/jorge/zorro/base_sample/lowbulge/40_likelihood/virac2_lowbulge_like_pm+par.fits  \
     -p gmm_params/pm+par_7comp \
     -ps pm+parallax
 ```
 
 ```bash
 python main.py  \
-    -f /home/jorge/zorro/base_sample/lowbulge/proc/virac2_lowbulge_proc.fits \
-    -o /home/jorge/zorro/base_sample/lowbulge/likelihood/virac2_lowbulge_proc_likelihood_pmonly.fits \
+    -f /home/jorge/zorro/base_sample/lowbulge/30_proc/virac2_lowbulge_proc.fits  \
+    -o /home/jorge/zorro/base_sample/lowbulge/40_likelihood/virac2_lowbulge_like_pm_only.fits \
     -p gmm_params/pm_only_13comp \
+    -ps pm_only
+```
+
+```bash
+python main.py \
+    -f /home/jorge/zorro/base_sample/lowbulge/30_proc/vvv_gaia_lowbulge_proc.fits \
+    -o /home/jorge/zorro/base_sample/lowbulge/40_likelihood/vvv_gaia_lowbulge_like_pm+par.fits \
+    -p gmm_params/pm+par_7comp \
+    -ps pm+parallax
+```
+
+```bash
+python main.py  \
+    -f /home/jorge/zorro/base_sample/lowbulge/30_proc/vvv_gaia_lowbulge_proc.fits  \
+    -o /home/jorge/zorro/base_sample/lowbulge/40_likelihood/vvv_gaia_lowbulge_like_pm_only.fits \
+    -p gmm_params/pm_only_13comp \
+    -ps pm_only
+```
+
+```bash
+python main.py \
+    -f /home/jorge/zorro/base_sample/lowbulge/30_proc/vvvx_x_gaia_lowbulge_proc.fits \
+    -o /home/jorge/zorro/base_sample/lowbulge/40_likelihood/vvvx_x_gaia_lowbulge_like_pm+par.fits \
+    -p gmm_params/pm+par_7comp \
+    -ps pm+parallax
+```
+
+```bash
+python main.py  \
+    -f /home/jorge/zorro/base_sample/lowbulge/30_proc/vvvx_x_gaia_lowbulge_proc.fits  \
+    -o /home/jorge/zorro/base_sample/lowbulge/40_likelihood/vvvx_x_gaia_lowbulge_like_pm_only.fits \
+    -p gmm_params/pm_only_13comp \
+    -ps pm_only
+```
+
+---
+
+```bash
+python main.py \
+    -f /home/jorge/Documents/data/sgr/base_sample/lowbulge/30_proc/virac2_lowbulge_proc.fits \
+    -o /home/jorge/Documents/data/sgr/base_sample/lowbulge/40_likelihood/virac2_lowbulge_like_pm+par.fits  \
+    -p gmm_params/pm+par_7comp \
+    -bs 400_000 \
+    -ps pm+parallax 
+```
+
+```bash
+python main.py  \
+    -f /home/jorge/zorro/base_sample/lowbulge/30_proc/virac2_lowbulge_proc.fits  \
+    -o /home/jorge/zorro/base_sample/lowbulge/40_likelihood/virac2_lowbulge_like_pm_only.fits \
+    -p gmm_params/pm_only_13comp \
+    -ps pm_only
+```
+
+```bash
+python main.py \
+    -f /home/jorge/zorro/base_sample/lowbulge/30_proc/vvv_gaia_lowbulge_proc.fits \
+    -o /home/jorge/zorro/base_sample/lowbulge/40_likelihood/vvv_gaia_lowbulge_like_pm+par.fits \
+    -p gmm_params/pm+par_7comp \
+    -ps pm+parallax
+```
+
+```bash
+python main.py  \
+    -f /home/jorge/zorro/base_sample/lowbulge/30_proc/vvv_gaia_lowbulge_proc.fits  \
+    -o /home/jorge/zorro/base_sample/lowbulge/40_likelihood/vvv_gaia_lowbulge_like_pm_only.fits \
+    -p gmm_params/pm_only_13comp \
+    -ps pm_only
+```
+
+```bash
+python main.py \
+    -f /home/jorge/zorro/base_sample/lowbulge/30_proc/vvvx_x_gaia_lowbulge_proc.fits \
+    -o /home/jorge/zorro/base_sample/lowbulge/40_likelihood/vvvx_x_gaia_lowbulge_like_pm+par.fits \
+    -p gmm_params/pm+par_7comp \
+    -ps pm+parallax
+```
+
+```bash
+python main.py  \
+    -f /home/jorge/Documents/data/sgr/base_sample/lowbulge/30_proc/vvvx_x_gaia_lowbulge_proc.fits  \
+    -o /home/jorge/Documents/data/sgr/base_sample/lowbulge/40_likelihood/vvvx_x_gaia_lowbulge_like_pm_only.fits \
+    -p gmm_params/pm_only_13comp \
+    -bs 100_000 \
     -ps pm_only
 ```
 

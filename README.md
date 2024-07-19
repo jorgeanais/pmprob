@@ -158,11 +158,37 @@ python getprob.py  \
 ```
 
 ### Get total probability
+
 /home/jorge/Documents/data/sgr/base_sample/lowbulge/49_likelihood_tf3/
+
 ```bash
 python getprob.py  \
     -f /home/jorge/zorro/base_sample/lowbulge/49_likelihood_tf3/vvv_withextinction_tf3corr_like.fits \
     -o /home/jorge/zorro/base_sample/lowbulge/73_totalprob_tf3/vvv_ext_tf3corr_pm+parallax-prob.fits \
+    -eta 0.01 \
+    -niter 2
+```
+
+```bash  # ARCHIVO 1
+python getprob.py  \
+    -f /home/jorge/zorro/base_sample/lowbulge/49_likelihood_tf3/vvv_withextinction_tf3corr_like.fits \
+    -o /home/jorge/zorro/base_sample/lowbulge/73_totalprob_tf3/vvv_ext_tf3corr_pm+parallax-prob.fits \
+    -eta 0.01 \
+    -niter 2
+```
+
+```bash  # ARCHIVO 2
+python getprob.py  \
+    -f /home/jorge/zorro/base_sample/lowbulge/49_likelihood_tf3/virac2_withextinction_tf3corr_like.fits \
+    -o /home/jorge/zorro/base_sample/lowbulge/73_totalprob_tf3/virac2_ext_tf3corr_pm+parallax-prob.fits \
+    -eta 0.01 \
+    -niter 2
+```
+
+```bash  # ARCHIVO 3
+python getprob.py  \
+    -f /home/jorge/zorro/base_sample/lowbulge/49_likelihood_tf3/vvvx_withSFDextinction_tf3corr_like.fits \
+    -o /home/jorge/zorro/base_sample/lowbulge/73_totalprob_tf3/vvvx_ext_tf3corr_pm+parallax-prob.fits \
     -eta 0.01 \
     -niter 2
 ```

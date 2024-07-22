@@ -21,7 +21,7 @@ from src.prob import get_field_and_memb_likelihoods, get_probability
 @click.option("-f", help="Input fits file", required=True)
 @click.option("-o", help="Output fits file", required=True)
 @click.option("-p", help="GMM parameters dir", default="gmm_params/pm+par_7comp/")
-@click.option("-ps", help="Parameter space (pm+parallax or pm_only)", default="pm+parallax")
+@click.option("-ps", help="Parameter space (pm+parallax, pm_only, pm+parallax_tf3, pm_only_tf3)", default="pm+parallax")
 @click.option("-bs", help="Batch size", type=int, default=100_000)
 @click.option("--prob", help="Compute total probabilities", is_flag=True, default=False)
 def main(f, o, p, prob, ps, bs):
@@ -61,6 +61,12 @@ def main(f, o, p, prob, ps, bs):
             errors_columns = ["pmra_error", "pmdec_error", "parallax_error"]
         case "pm_only":
             data_columns = ["pmra", "pmdec"]
+            errors_columns = ["pmra_error", "pmdec_error"]
+        case "pm+parallax_tf3":
+            data_columns = ["pmra_corr_tf3", "pmdec_corr_tf3", "parallax"]
+            errors_columns = ["pmra_error", "pmdec_error", "parallax_error"]
+        case "pm_only_tf3":
+            data_columns = ["pmra_corr_tf3", "pmdec_corr_tf3"]
             errors_columns = ["pmra_error", "pmdec_error"]
         case _:
             logging.error("Parameter space must be 'pm+parallax' or 'pm_only'")

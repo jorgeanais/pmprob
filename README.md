@@ -151,19 +151,19 @@ python main.py \
 ```bash
 python main.py \
     -f /home/jorge/zorro/base_sample/lowbulge/46_tf3corr_nolikelihood/vvv_withextinction_tf3corr.fits \
-    -o /home/jorge/zorro/base_sample/lowbulge/49_likelihood_tf3/vvv_withextinction_tf3corr_like9.fits \
+    -o /home/jorge/zorro/base_sample/lowbulge/49_likelihood_tf3/vvv_ext_tf3corr_like9.fits \
     -p gmm_params/pm+par_tf3_9comp \
     -bs 100_000 \
-    -ps pm+parallax
+    -ps pm+parallax_tf3
 ```
 
 ```bash
 python main.py \
     -f /home/jorge/zorro/base_sample/lowbulge/46_tf3corr_nolikelihood/virac2_withextinction_tf3corr.fits \
-    -o /home/jorge/zorro/base_sample/lowbulge/49_likelihood_tf3/virac2_withextinction_tf3corr_like9.fits \
+    -o /home/jorge/zorro/base_sample/lowbulge/49_likelihood_tf3/virac2_ext_tf3corr_like9.fits \
     -p gmm_params/pm+par_tf3_9comp \
     -bs 100_000 \
-    -ps pm+parallax
+    -ps pm+parallax_tf3
 ```
 
 ```bash
@@ -172,7 +172,7 @@ python main.py \
     -o /home/jorge/zorro/base_sample/lowbulge/49_likelihood_tf3/vvvx_tf3corr_like9.fits \
     -p gmm_params/pm+par_tf3_9comp \
     -bs 100_000 \
-    -ps pm+parallax
+    -ps pm+parallax_tf3
 ```
 
 
@@ -232,20 +232,18 @@ python getprob.py  \
 
 #### Para muestras cuts*
 
-```bash
+```bash MALO-REHACER falto -ps pm+parallax_tf3
 python getprob.py  \
     -f /home/jorge/zorro/base_sample/lowbulge/49_likelihood_tf3/virac2_ext_tf3corr_like9_pm+par_cuts.fits \
     -o /home/jorge/zorro/base_sample/lowbulge/73_totalprob_tf3/virac2_ext_tf3corr_prob9_pm+par_cuts.fits \
     -eta 0.01 \
     -niter 1
-    -ps pm+parallax_tf3
 ```
 
-```bash
+```bash MALO-REHACER falto -ps pm+parallax_tf3
 python getprob.py  \
     -f /home/jorge/zorro/base_sample/lowbulge/49_likelihood_tf3/vvv_ext_tf3corr_like9_pm+par_cuts.fits \
     -o /home/jorge/zorro/base_sample/lowbulge/73_totalprob_tf3/vvv_ext_tf3corr_prob9_pm+par_cuts.fits \
     -eta 0.01 \
     -niter 1
-    -ps pm+parallax_tf3
 ```
